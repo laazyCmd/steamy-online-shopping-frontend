@@ -1,0 +1,20 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #203153;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: auto;
+}
