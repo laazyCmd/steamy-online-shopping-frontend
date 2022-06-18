@@ -3,7 +3,7 @@
 </script>
 
 <nav class="bg-[#171A21] text-white">
-    <div class="flex justify-end gap-x-[18px] mx-[238px] pt-[5px] text-opacity-25">
+    <div class="flex justify-end gap-x-[18px] mx-auto max-w-[1307px] pt-[5px] text-opacity-25">
         <section class="flex gap-x-[13px] items-center">
             <!-- Help -->
             <a class="flex items-center text-sm gap-x-[5px] hover:opacity-75" href="/help">
@@ -31,7 +31,7 @@
             </button>
         </section>
     </div>
-    <header class="flex justify-around items-center mx-[353px] mt-[4px] pb-11">
+    <header class="flex justify-around items-center mx-auto max-w-[1077px] mt-[4px] pb-11">
         <!-- Logo -->
         <a href="/">
             <figure>

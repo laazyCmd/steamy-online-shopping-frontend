@@ -5,7 +5,7 @@
 </script>
 
 <Nav/>
-<main class="gap-y-16 mx-[451px] mt-[30px] h-full">
+<main class="flex flex-col flex-1 gap-y-16 mx-auto max-w-[904px] mt-[30px] h-full">
   <slot/>
 </main>
 <Footer/>
