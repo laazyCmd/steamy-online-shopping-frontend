@@ -6,7 +6,7 @@
         </figure>
     </header>
     <!-- product details -->
-    <div class="flex flex-col h-[175px] px-3 py-4">
+    <div class="flex flex-col h-[175px] px-3 py-3">
         <p class="whitespace-nowrap overflow-hidden text-ellipsis h-full">Undefined dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</p>
         <!-- price & sales -->
         <section class="flex justify-between">

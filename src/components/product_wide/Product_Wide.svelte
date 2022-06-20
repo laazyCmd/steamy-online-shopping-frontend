@@ -4,7 +4,7 @@
         <img class="my-auto" src="/steamy-logo.png" alt="Steamy">
     </header>
     <!-- Product Details -->
-    <section class="flex flex-col bg-[#1A678A] h-[40%] p-4">
+    <section class="flex flex-col bg-[#1A678A] h-[40%] p-3">
         <!-- Name -->
         <header class="h-full">
             <span class="inline-block bg-white w-4/6 h-[23px] my-[3px] rounded-xl opacity-50"></span>
