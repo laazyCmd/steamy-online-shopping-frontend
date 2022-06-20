@@ -1,5 +1,5 @@
 <script>
-    import BrowseMore from "$components/browsemore/BrowseMore.svelte";
+    import SectionsButton from "$components/sectionsbutton/SectionsButton.svelte";
     import Product from "$components/product/Product.svelte";
 </script>
 
@@ -7,7 +7,9 @@
 <section id="index-sections">
     <header>
         <h1>POPULAR & FEATURED</h1>
-        <BrowseMore href="/search"/>
+        <SectionsButton href="/search">
+            Browse for more
+        </SectionsButton>
     </header>
     <!-- products -->
     <div class="sections-content">
