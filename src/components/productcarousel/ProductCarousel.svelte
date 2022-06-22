@@ -12,15 +12,15 @@
         else if ( new_index < 0 ) current_index = carousel_pages - 1;
         else current_index = new_index;
         
-        const carousel_slide = document.getElementById( "carousel-slide" );
-        carousel_slide?.children[ current_index ].classList.add( "selected-page" );
-        carousel_slide?.children[ last_index ].classList.remove( "selected-page" );
+        const carousel_content = document.getElementById( "carousel-content" );
+        carousel_content?.children[ last_index ].classList.remove( "selected-page" );
+        carousel_content?.children[ current_index ].classList.add( "selected-page" );
     }
 
     onMount( () => {
-        const carousel_slide = document.getElementById( "carousel-slide" );
-        carousel_slide?.children[ 0 ].classList.add( "selected-page" );
-        carousel_pages = carousel_slide?.children.length ?? 1;
+        const carousel_content = document.getElementById( "carousel-content" );
+        carousel_content?.children[ 0 ].classList.add( "selected-page" );
+        carousel_pages = carousel_content?.children.length ?? 1;
     } );
 </script>
 
@@ -33,10 +33,8 @@
             </figure>
         </button>
     </div>
-    <div id="carousel-content" class="flex overflow-hidden">
-        <div id="carousel-slide" class="relative flex w-full">
-            <slot></slot>
-        </div>
+    <div id="carousel-content" class="relative flex overflow-hidden">
+        <slot></slot>
     </div>
     <div id="next-arrow" class="absolute flex top-0 justify-center h-full flex-col right-0 translate-x-12">
         <button class="items-center bg-gradient-to-r from-[#203153] hover:to-[#45657a] to-[#102330] h-[108px]"
@@ -47,7 +45,7 @@
         </button>
     </div>
 </section>
-<div id="carousel-dots" class="flex mt-3 gap-x-2 justify-center">
+<div id="carousel-dots" class="flex mt-4 gap-x-2 justify-center">
     { #each Array( carousel_pages ) as _, index }
         <span 
             class="inline-block bg-[#767f8a] w-[15px] h-[9px] rounded-sm cursor-pointer hover:opacity-75 opacity-50 duration-200"
@@ -57,21 +55,28 @@
 </div>
 
 <style>
-    :global( #carousel-slide > * ) {
-        position: absolute;
-        transform: translateX( 100% );
-        opacity: .5;
+    :global( #carousel-content > * ) {
+        min-width: 100%;
+        display: none;
     }
 
-    :global( #carousel-slide > .selected-page ) {
-        min-width: 100%;
-        transition: opacity 200ms ease-in;
+    :global( #carousel-content > .selected-page ) {
+        animation: fade-in 400ms;
         position: relative;
-        transform: translateX( 0% );
-        opacity: 1;
+        display: flex;
     }
 
     :global( .selected-dot ) {
         opacity: 1;
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0.75;
+        }
+
+        100% {
+            opacity: 1;
+        }
     }
 </style>
