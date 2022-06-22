@@ -6,7 +6,7 @@
 </script>
 
 <!-- popular & featured -->
-<section id="index-sections">
+<section class="index-sections">
     <header>
         <h1>POPULAR & FEATURED</h1>
         <SectionsButton href="/search">
@@ -22,7 +22,7 @@
 </section>
 
 <!-- browse by steamy -->
-<section id="index-sections">
+<section class="index-sections">
     <header>
         <h1>BROWSE BY STEAMY</h1>
     </header>
@@ -44,7 +44,7 @@
 </section>
 
 <!-- Under P400 -->
-<section id="index-sections">
+<section class="index-sections">
     <header>
         <h1>UNDER P400</h1>
         <section>
@@ -76,18 +76,18 @@
 </section>
 
 <style>
-    #index-sections {
+    .index-sections {
         width: 100%;
         margin-bottom: 1rem;
     }
 
-    #index-sections header {
+    .index-sections header {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    #index-sections section {
+    .index-sections section {
         display: flex;
         align-items: center;
         column-gap: 8px;
