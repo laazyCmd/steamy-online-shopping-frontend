@@ -1,6 +1,8 @@
 <script>
     import SectionsButton from "$components/sectionsbutton/SectionsButton.svelte";
     import Product from "$components/product/Product.svelte";
+    import Product_Wide from "$components/product_wide/Product_Wide.svelte";
+    import ProductCarousel from "$components/productcarousel/ProductCarousel.svelte";
 </script>
 
 <!-- popular & featured -->
@@ -41,6 +43,38 @@
     </div>
 </section>
 
+<!-- Under P400 -->
+<section id="index-sections">
+    <header>
+        <h1>UNDER P400</h1>
+        <section>
+            <SectionsButton href="/">
+                Under P200
+            </SectionsButton>
+            <SectionsButton href="/">
+                Browse for more
+            </SectionsButton>
+        </section>
+    </header>
+    <!-- Product Carousel -->
+    <div id="product-carousel">
+        <ProductCarousel>
+            <div class="flex gap-x-3">
+                <Product_Wide />
+                <Product_Wide />
+            </div>
+            <div class="flex gap-x-3">
+                <Product_Wide />
+                <Product_Wide />
+            </div>
+            <div class="flex gap-x-3">
+                <Product_Wide />
+                <Product_Wide />
+            </div>
+        </ProductCarousel>
+    </div>
+</section>
+
 <style>
     #index-sections {
         width: 100%;
@@ -51,6 +85,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    #index-sections section {
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+    }
+
+    #product-carousel {
+        margin-top: 10px;
     }
 
     .sections-content {
