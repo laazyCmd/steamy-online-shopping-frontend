@@ -1,7 +1,9 @@
-<section class="h-[277px] w-[486px] overflow-hidden rounded-sm">
+<a href="/" class="h-[277px] w-[486px] overflow-hidden rounded-sm">
     <!-- Product Image -->
     <header class="flex justify-center h-[60%] bg-white">
-        <img class="my-auto" src="/steamy-logo.png" alt="Steamy">
+        <figure class="my-auto">
+            <img src="/steamy-logo.png" alt="Steamy" width="221" height="64">
+        </figure>
     </header>
     <!-- Product Details -->
     <section class="flex flex-col bg-[#1A678A] h-[40%] p-3">
@@ -17,4 +19,4 @@
             <span class="inline-block bg-white w-[82px] h-[18px] opacity-50 rounded-xl my-[3px]"></span>
         </div>
     </section>
-</section>
+</a>
