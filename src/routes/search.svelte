@@ -2,9 +2,9 @@
     import { page } from "$app/stores";
     import Product_Loading from "$components/product_loading/Product_Loading.svelte";
     import Product_Medium from "$components/product_medium/Product_Medium.svelte";
+    import SortSelection from "$components/sortselection/SortSelection.svelte"
     import RangeSlider from "svelte-range-slider-pips";
     
-    let open_sorting = false;
     let sort_by = "Release date";
     let price_under = [2600];
 </script>
@@ -28,30 +28,12 @@
                 <!-- Sort by -->
                 <section id="sort-by">
                     <p>Sort by</p>
-                    <button id="sort-button" on:click={ () => open_sorting = !open_sorting }>
-                        <p>
-                            { sort_by ?? "Release date" }
-                            <span>
-                                <figure>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="18" height="18"><path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z"/></svg>
-                                </figure>
-                            </span>
-                        </p>
-                        <ul id="sort-selection" class:sort-selection_show={ open_sorting }>
-                            <li class="bg-gradient-to-r hover:from-[#67c1f5]">
-                                <button on:click={ () => sort_by = "Release date" }>Release date</button>
-                            </li>
-                            <li class="bg-gradient-to-r hover:from-[#67c1f5]">
-                                <button on:click={ () => sort_by = "Name" }>Name</button>
-                            </li>
-                            <li class="bg-gradient-to-r hover:from-[#67c1f5]">
-                                <button on:click={ () => sort_by = "Highest price" }>Highest price</button>
-                            </li>
-                            <li class="bg-gradient-to-r hover:from-[#67c1f5]">
-                                <button on:click={ () => sort_by = "Lowest price" }>Lowest price</button>
-                            </li>
-                        </ul>
-                    </button>
+                    <SortSelection { sort_by }>
+                        <button>Release date</button>
+                        <button>Name</button>
+                        <button>Highest price</button>
+                        <button>Lowest price</button>
+                    </SortSelection>
                 </section>
             </header>
             <!-- Product Results -->
@@ -193,46 +175,6 @@
         color: #4C6C8C;
         font-size: 0.875rem; /* 14px */
         line-height: 1.25rem; /* 20px */
-    }
-
-    #sort-selection {
-        width: 100%;
-        text-align: left;
-        margin-top: 5px;
-        background-color: #417a9b;
-        display: none;
-        position: absolute;
-    }
-
-    .sort-selection_show {
-        display: block !important;
-    }
-
-    #sort-selection > li button {
-        text-align: left;
-        width: 100%;
-        height: 100%;
-        padding: 2px 10px;
-        font-size: 0.875rem; /* 14px */
-        line-height: 1.25rem; /* 20px */
-    }
-
-    #sort-button > p {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #67C1F5;
-        background-color: #213A4C;
-        border-radius: 2px;
-        padding: 0 8px;
-        column-gap: 10px;
-        width: 145px;
-        fill: white;
-    }
-
-    #sort-button > p:hover {
-        color: white;
-        background-color: #5199c2;
     }
 
     #product-results {
