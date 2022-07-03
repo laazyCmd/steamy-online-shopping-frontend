@@ -40,7 +40,7 @@
                         { #if product.prod_rating / index >= 1 }
                             <Star rating={ 1 } />
                         { :else }
-                            <Star rating={ 0 } />
+                            <Star />
                         { /if }
                     { /each }
                     <p>({ product.prod_rating })</p>
