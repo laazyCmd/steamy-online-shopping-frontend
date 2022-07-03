@@ -1,4 +1,14 @@
-export const get = async ( { params } ) => {
-    console.log( "lmao" );
-    return { body: { test: params.id, name: params.name } }
+export const get = async ( { params } )  => {
+    const req = await fetch( "http://localhost:8093/product/" + params.id );
+    if ( req.status === 404 ) throw "Product not found.";
+
+    const product = await req.json();
+    if ( product.prod_name === decodeURIComponent( params.name ) ) {
+        return { body: { product } }
+    }
+
+    return { 
+        status: 302,
+        headers: { Location: encodeURIComponent( product.prod_name ) },
+    }
 }

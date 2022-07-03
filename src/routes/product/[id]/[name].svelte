@@ -1,53 +1,63 @@
 <script>
     import Star from "$components/star/Star.svelte";
+    export let product;
+    const product_description = "<p>" + product.prod_description.replace( "\n", "</p>\n<p>") + "</p>";
 </script>
 
 <div id="product-page">
     <header id="product-breadcrumb">
         <a href="/">All Products</a>
         <span>></span>
-        <a href="/">%category%</a>
+        <a href="/">{ product.prod_category }</a>
         <span>></span>
-        <a href="/">%brand%</a>
-        <span>></span>
-        <a href="/">%prod_name%</a>
+        { #if product.prod_brand }
+            <a href="/">{ product.prod_brand }</a>
+            <span>></span>
+        { /if }
+        <a href="/product/{ product.prod_id }/{ product.prod_name }">{ product.prod_name }</a>
     </header>
     
     <section id="product">
         <!-- Name -->
         <header>
-            <p>%prod_name%</p>
+            <p>{ product.prod_name }</p>
         </header>
         <!-- Images & Price -->
         <div id="product-details">
             <section id="product-image">
                 <div id="image-placeholder">
-                    <img src="/steamy-logo.png" alt="">
+                    { #if product.prod_image }
+                        <img src="data:image/jpg;base64,{ product.prod_image }" alt="Product">
+                    { :else }
+                        <img src="/steamy-logo.png" alt="Steamy Logo">
+                    { /if }
                 </div>
             </section>
             <section id="product-price">
                 <!-- Rating -->
                 <div id="product-rating">
-                    { #each Array( 3 ) as _ }
-                        <Star rating={ 1 } />
+                    { #each Array( 5 ) as _, index }
+                        { #if product.prod_rating / index >= 1 }
+                            <Star rating={ 1 } />
+                        { :else }
+                            <Star rating={ 0 } />
+                        { /if }
                     { /each }
-                    <Star rating={ 0 } />
-                    <Star rating={ 0 } />
-                    <p>(ඞ)</p>
+                    <p>({ product.prod_rating })</p>
                 </div>
                 <!-- Seller -->
-                <p id="product-seller">Sold by <b>%seller_name%</b></p>
+                <p id="product-seller">Sold by <b>{ product.seller_name }</b></p>
                 <hr>
                 <!-- Sales -->
-                <p id="product-sales"><u>%prod_sales%</u> items sold</p>
+                <p id="product-sales"><u>{ product.prod_sales }</u> items sold</p>
                 <!-- Shipping -->
                 <div id="product-shipping">
                     <header>
                         <p>Shipping</p>
                     </header>
                     <section id="shipping-details">
-                        <p>Ships from <span>%shipping_origin%</span></p>
-                        <p>Shipping fee <span>P%shipping_fee%</span></p>
+                        <p>Ships from <span>{ product.shipping_origin }</span></p>
+                        <p>Shipping fee <span>P{ product.shipping_fee }</span></p>
                     </section>
                 </div>
                 <!-- Quantity & Add to Cart -->
@@ -70,10 +80,10 @@
                             </div>
                         </div>
                         <!-- Stocks Left -->
-                        <p id="stocks-left"><b>%prod_stocks%</b> left</p>
+                        <p id="stocks-left"><b>{ product.prod_stocks }</b> left</p>
                     </section>
                     <section id="add-cart">
-                        <p>P%prod_price</p>
+                        <p>P{ product.prod_price }</p>
                         <button>ADD</button>
                     </section>
                 </div>
@@ -97,15 +107,17 @@
                     <div id="category">
                         <a href="/">All Products</a>
                         <span>></span>
-                        <a href="/">%category%</a>
+                        <a href="/">{ product.prod_category }</a>
                         <span>></span>
-                        <a href="/">%brand%</a>
-                        <span>></span>
-                        <a href="/">%prod_name%</a>
+                        { #if product.prod_brand }
+                            <a href="/">{ product.prod_brand }</a>
+                            <span>></span>
+                        { /if }
+                        <a href="/">{ product.prod_name }</a>
                     </div>
-                    <p>%country_origin%</p>
-                    <p>%prod_stocks%</p>
-                    <p>%shipping_origin%</p>
+                    <p>{ product.country_origin }</p>
+                    <p>{ product.prod_stocks }</p>
+                    <p>{ product.shipping_origin }</p>
                 </div>
             </section>
         </div>
@@ -115,9 +127,7 @@
                 <p>PRODUCT DESCRIPTION</p>
             </header>
             <section id="description">
-                <p>On January 1st, 1994, chapter 345 of JoJo's Bizarre Adventure manga was released in Weekly Shonen Jump №1. In the chapter, character Yoshikage Kira enters a lengthy monologue about his personal life, describing his daily routine, habits and interests (manga panels shown below).</p>
-                <p>On August 19th, 2016, episode 21 "Yoshikage Kira Just Wants to Live Quietly, Part 1" of part four Diamond is Unbreakable of JoJo's Bizarre Adventure anime series premiered. In the episode, the monologue is featured (shown below, left (Japanese) and right (English dub)).</p>
-                <p>My name is Yoshikage Kira. I'm 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest. I don't smoke, but I occasionally drink. I'm in bed by 11 PM, and make sure I get eight hours of sleep, no matter what. After having a glass of warm milk and doing about twenty minutes of stretches before going to bed, I usually have no problems sleeping until morning. Just like a baby, I wake up without any fatigue or stress in the morning. I was told there were no issues at my last check-up. I'm trying to explain that I'm a person who wishes to live a very quiet life. I take care not to trouble myself with any enemies, like winning and losing, that would cause me to lose sleep at night. That is how I deal with society, and I know that is what brings me happiness. Although, if I were to fight I wouldn't lose to anyone.</p>
+                { @html product_description }
             </section>
         </div>
     </section>
@@ -168,12 +178,14 @@
         display: flex;
         align-items: flex-start;
         background-color: white;
+        overflow: hidden;
         width: 100%;
         height: 100%;
     }
 
     #image-placeholder > img {
         margin: auto;
+        height: 80%;
     }
 
     #product-price {
