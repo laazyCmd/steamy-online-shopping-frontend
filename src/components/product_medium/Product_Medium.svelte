@@ -14,9 +14,9 @@
         <!-- Price & Sales -->
         <div class="flex justify-between items-center">
             <p class="flex items-center bg-[#141F2C66] bg-opacity-40 px-3 py-[3px]">
-                <span class="inline-block bg-[#ACDBF5] w-[92px] h-[18px] opacity-50 rounded-xl my-[3px]"></span>
+                <span class="inline-block bg-[#ACDBF5] w-[69px] h-[18px] opacity-50 rounded-xl my-[3px]"></span>
             </p>
-            <span class="inline-block bg-white w-[82px] h-[18px] opacity-50 rounded-xl my-[3px]"></span>
+            <span class="inline-block bg-white w-[61px] h-[18px] opacity-50 rounded-xl my-[3px]"></span>
         </div>
     </section>
 </a>
