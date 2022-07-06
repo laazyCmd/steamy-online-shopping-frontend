@@ -3,6 +3,22 @@
     import Product from "$components/product/Product.svelte";
     import Product_Wide from "$components/product_wide/Product_Wide.svelte";
     import ProductCarousel from "$components/productcarousel/ProductCarousel.svelte";
+
+    const getPopular = async () => {
+        const req = await fetch( "http://localhost:8093/product/list?popular=true&pageSize=3", {
+            method: 'GET'
+        } );
+        const res = await req.json();
+        return res.content;
+    }
+
+    const getBelow400 = async () => {
+        const req = await fetch( "http://localhost:8093/product/list?price=400&pageSize=6&popular=false", {
+            method: 'GET'
+        } );
+        const res = await req.json();
+        return res.content;
+    }
 </script>
 
 <!-- popular & featured -->
@@ -15,9 +31,15 @@
     </header>
     <!-- products -->
     <div class="sections-content">
-        <Product/>
-        <Product/>
-        <Product/>
+        { #await getPopular() }
+            <Product />
+            <Product />
+            <Product />
+        { :then products }
+            <Product product={ products[0] } />
+            <Product product={ products[1] } />
+            <Product product={ products[2] } />
+        { /await }
     </div>
 </section>
 
@@ -58,20 +80,37 @@
     </header>
     <!-- Product Carousel -->
     <div id="product-carousel">
-        <ProductCarousel>
-            <div class="flex gap-x-3">
-                <Product_Wide />
-                <Product_Wide />
-            </div>
-            <div class="flex gap-x-3">
-                <Product_Wide />
-                <Product_Wide />
-            </div>
-            <div class="flex gap-x-3">
-                <Product_Wide />
-                <Product_Wide />
-            </div>
-        </ProductCarousel>
+        { #await getBelow400() }
+            <ProductCarousel>
+                <div class="flex gap-x-3">
+                    <Product_Wide />
+                    <Product_Wide />
+                </div>
+                <div class="flex gap-x-3">
+                    <Product_Wide />
+                    <Product_Wide />
+                </div>
+                <div class="flex gap-x-3">
+                    <Product_Wide />
+                    <Product_Wide />
+                </div>
+            </ProductCarousel>
+        { :then products }
+            <ProductCarousel>
+                <div class="flex gap-x-3">
+                    <Product_Wide product={ products[0] } />
+                    <Product_Wide product={ products[1] } />
+                </div>
+                <div class="flex gap-x-3">
+                    <Product_Wide product={ products[2] } />
+                    <Product_Wide product={ products[3] } />
+                </div>
+                <div class="flex gap-x-3">
+                    <Product_Wide product={ products[4] } />
+                    <Product_Wide product={ products[5] } />
+                </div>
+            </ProductCarousel>
+        { /await }
     </div>
 </section>
 
