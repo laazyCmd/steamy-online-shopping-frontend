@@ -3,12 +3,12 @@ export const get = async ( { params } )  => {
     if ( req.status === 404 ) throw "Product not found.";
 
     const product = await req.json();
-    if ( product.prod_name === decodeURIComponent( params.name ) ) {
+    if ( product.name === decodeURIComponent( params.name ) ) {
         return { body: { product } }
     }
 
     return { 
         status: 302,
-        headers: { Location: encodeURIComponent( product.prod_name ) },
+        headers: { Location: encodeURIComponent( product.name ) },
     }
 }

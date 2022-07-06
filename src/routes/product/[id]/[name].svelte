@@ -1,33 +1,33 @@
 <script>
     import Star from "$components/star/Star.svelte";
     export let product;
-    const product_description = "<p>" + product.prod_description.replace( "\n", "</p>\n<p>") + "</p>";
+    const description = "<p>" + product.description.replace( "\n", "</p>\n<p>") + "</p>";
 </script>
 
 <div id="product-page">
     <header id="product-breadcrumb">
         <a href="/">All Products</a>
         <span>></span>
-        <a href="/">{ product.prod_category }</a>
+        <a href="/">{ product.category }</a>
         <span>></span>
-        { #if product.prod_brand }
-            <a href="/">{ product.prod_brand }</a>
+        { #if product.brand }
+            <a href="/">{ product.brand }</a>
             <span>></span>
         { /if }
-        <a href="/product/{ product.prod_id }/{ product.prod_name }">{ product.prod_name }</a>
+        <a href="/product/{ product.id }/{ product.name }">{ product.name }</a>
     </header>
     
     <section id="product">
         <!-- Name -->
         <header>
-            <p>{ product.prod_name }</p>
+            <p>{ product.name }</p>
         </header>
         <!-- Images & Price -->
         <div id="product-details">
             <section id="product-image">
                 <div id="image-placeholder">
-                    { #if product.prod_image }
-                        <img src="data:image/jpg;base64,{ product.prod_image }" alt="Product">
+                    { #if product.image }
+                        <img src="data:image/jpg;base64,{ product.image }" alt="Product">
                     { :else }
                         <img src="/steamy-logo.png" alt="Steamy Logo">
                     { /if }
@@ -37,27 +37,27 @@
                 <!-- Rating -->
                 <div id="product-rating">
                     { #each Array( 5 ) as _, index }
-                        { #if product.prod_rating / index >= 1 }
+                        { #if product.rating / index >= 1 }
                             <Star rating={ 1 } />
                         { :else }
                             <Star />
                         { /if }
                     { /each }
-                    <p>({ product.prod_rating })</p>
+                    <p>({ product.rating })</p>
                 </div>
                 <!-- Seller -->
-                <p id="product-seller">Sold by <b>{ product.seller_name }</b></p>
+                <p id="product-seller">Sold by <b>{ product.seller }</b></p>
                 <hr>
                 <!-- Sales -->
-                <p id="product-sales"><u>{ product.prod_sales }</u> items sold</p>
+                <p id="product-sales"><u>{ product.sales }</u> items sold</p>
                 <!-- Shipping -->
                 <div id="product-shipping">
                     <header>
                         <p>Shipping</p>
                     </header>
                     <section id="shipping-details">
-                        <p>Ships from <span>{ product.shipping_origin }</span></p>
-                        <p>Shipping fee <span>P{ product.shipping_fee }</span></p>
+                        <p>Ships from <span>{ product.shippingOrigin }</span></p>
+                        <p>Shipping fee <span>P{ product.shippingFee }</span></p>
                     </section>
                 </div>
                 <!-- Quantity & Add to Cart -->
@@ -80,10 +80,10 @@
                             </div>
                         </div>
                         <!-- Stocks Left -->
-                        <p id="stocks-left"><b>{ product.prod_stocks }</b> left</p>
+                        <p id="stocks-left"><b>{ product.stocks }</b> left</p>
                     </section>
                     <section id="add-cart">
-                        <p>P{ product.prod_price }</p>
+                        <p>P{ product.price }</p>
                         <button>ADD</button>
                     </section>
                 </div>
@@ -107,17 +107,17 @@
                     <div id="category">
                         <a href="/">All Products</a>
                         <span>></span>
-                        <a href="/">{ product.prod_category }</a>
+                        <a href="/">{ product.category }</a>
                         <span>></span>
-                        { #if product.prod_brand }
-                            <a href="/">{ product.prod_brand }</a>
+                        { #if product.brand }
+                            <a href="/">{ product.brand }</a>
                             <span>></span>
                         { /if }
-                        <a href="/">{ product.prod_name }</a>
+                        <a href="/">{ product.name }</a>
                     </div>
-                    <p>{ product.country_origin }</p>
-                    <p>{ product.prod_stocks }</p>
-                    <p>{ product.shipping_origin }</p>
+                    <p>{ product.countryOrigin }</p>
+                    <p>{ product.stocks }</p>
+                    <p>{ product.shippingOrigin }</p>
                 </div>
             </section>
         </div>
@@ -127,7 +127,7 @@
                 <p>PRODUCT DESCRIPTION</p>
             </header>
             <section id="description">
-                { @html product_description }
+                { @html description }
             </section>
         </div>
     </section>
