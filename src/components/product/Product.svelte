@@ -2,7 +2,7 @@
     export let product = {};
 </script>
 
-<a href="/product/{ product.id }/{ encodeURIComponent( product.name ) }" class="w-[290px] h-[415px] bg-[#1A678A] rounded-sm overflow-hidden">
+<a href="/{ "product/" + product.id }/{ encodeURIComponent( product.name ) }" class="w-[290px] h-[415px] bg-[#1A678A] rounded-sm overflow-hidden">
     <!-- Product Image -->
     <header class="flex justify-center h-[60%] bg-white">
         <figure class="my-auto">
