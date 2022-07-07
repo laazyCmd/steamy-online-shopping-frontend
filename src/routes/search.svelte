@@ -1,12 +1,47 @@
 <script>
     import { page } from "$app/stores";
+    import { goto } from "$app/navigation";
+    import { onMount } from "svelte";
     import Product_Loading from "$components/product_loading/Product_Loading.svelte";
     import Product_Medium from "$components/product_medium/Product_Medium.svelte";
     import SortSelection from "$components/sortselection/SortSelection.svelte"
     import RangeSlider from "svelte-range-slider-pips";
     
-    let sort_by = "Release date";
+    let searchTag = $page.url.searchParams.get( "name" )?.trim() ?? "";
     let price_under = [2600];
+    if ( $page.url.searchParams.get( "price" ) ) price_under[0] = parseInt( $page.url.searchParams.get( "price" ) );
+    let sortBy = $page.url.searchParams.get( "sort" );
+
+    let products = {};
+    let totalPages = 0;
+    let currentPage = 0;
+
+    const switchPage = ( page ) => {
+        currentPage = page;
+        console.log( currentPage );
+        getProductList( sortBy );
+    }
+
+    const getProductList = async ( sort ) => {
+        if ( price_under[0] !== 2600 ) $page.url.searchParams.set( "price", `${ price_under }` );
+        if ( searchTag.trim() !== "" ) $page.url.searchParams.set( "name", searchTag.trim() );
+        $page.url.searchParams.set( "page", currentPage.toString() );
+        
+        sortBy = sort ?? "dateCreated";
+        $page.url.searchParams.set( "sort", sortBy );
+
+        console.log( "http://localhost:8093/product/list?" + $page.url.searchParams.toString() );
+
+        goto( "?" + $page.url.searchParams.toString() );
+
+        const req = await fetch( "http://localhost:8093/product/list?" + $page.url.searchParams.toString() );
+        const res = await req.json();
+
+        products = res.content;
+        totalPages = res.totalPages;
+    };
+    
+    onMount( () => getProductList() );
 </script>
 
 <!-- All Products -->
@@ -20,34 +55,78 @@
             <header>
                 <!-- Search -->
                 <section id="search">
-                    <input type="text" placeholder="enter search item">
-                    <button>
+                    <input type="text" bind:value={ searchTag } placeholder="enter search item">
+                    <button on:click={ () => getProductList( sortBy ) }>
                         <p>Search</p>
                     </button>
                 </section>
                 <!-- Sort by -->
                 <section id="sort-by">
                     <p>Sort by</p>
-                    <SortSelection { sort_by }>
-                        <button>Release date</button>
-                        <button>Name</button>
-                        <button>Highest price</button>
-                        <button>Lowest price</button>
+                    <SortSelection { getProductList }>
+                        <button data-sort="dateCreated">Release date</button>
+                        <button data-sort="name">Name</button>
+                        <button data-sort="price,desc">Highest price</button>
+                        <button data-sort="price,asc">Lowest price</button>
                     </SortSelection>
                 </section>
             </header>
             <!-- Product Results -->
             <ul id="product-results">
-                <li>
-                    <Product_Loading />
-                </li>
-                <li>
-                    <Product_Loading />
-                </li>
-                <li>
-                    <Product_Loading />
-                </li>
+                { #if Object.keys( products ).length }
+                    { #each products as product (product.id) }
+                        <li>
+                            <Product_Medium { product } />
+                        </li>
+                    { /each }
+                { :else }
+                    <li>
+                        <Product_Loading />
+                    </li>
+                    <li>
+                        <Product_Loading />
+                    </li>
+                    <li>
+                        <Product_Loading />
+                    </li>
+                { /if }
             </ul>
+            <!-- page buttons -->
+            <section id="page-buttons">
+                <button class="page-nav"
+                class:nav-disabled={ currentPage === 0 }
+                on:click={ () => switchPage( --currentPage ) }
+                disabled={ currentPage === 0 }>
+                    <figure>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="20" height="31"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M328 112L184 256l144 144"/></svg>
+                    </figure>
+                </button>
+                <div id="pages">
+                    { #each Array( 5 ) as _, index }
+                        { #if currentPage >= 5 }
+                            <button on:click={ () => switchPage( index + currentPage ) }
+                            class:page-selected={ index + currentPage === currentPage }
+                            class:hide-page={ index + currentPage >= totalPages }>
+                                { ( index + currentPage ) + 1 }
+                            </button>
+                        { :else }
+                            <button on:click={ () => switchPage( index ) }
+                            class:page-selected={ index === currentPage }
+                            class:hide-page={ index >= totalPages }>
+                                { index + 1 }
+                            </button>
+                        { /if }
+                    { /each }
+                </div>
+                <button class="page-nav"
+                class:nav-disabled={ currentPage === totalPages - 1 }
+                on:click={ () => switchPage( ++currentPage ) }
+                disabled={ currentPage === totalPages - 1 }>
+                    <figure>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="20" height="31"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"/></svg>
+                    </figure>
+                </button>
+            </section>
         </div>
         <div id="narrow-products">
             <!-- Narrow by Price -->
@@ -64,7 +143,7 @@
                             max={ 2600 } 
                             step={ 200 } 
                             springValues={{ stiffness: 1, damping: 1 }}
-                            on:stop={ ( e ) => console.log( e.detail.value ) } />
+                            on:stop={ ( e ) => getProductList( sortBy ) } />
                     </div>
                     { #if price_under[0] === 2600 }
                         <p>Any Price</p>
@@ -190,6 +269,56 @@
         overflow: hidden;
         width: 220px;
         height: 330px;
+    }
+
+    #page-buttons {
+        display: flex;
+        justify-content: center;
+        margin: 24px 0;
+        column-gap: 13px;
+        justify-items: center;
+    }
+
+    #pages {
+        display: flex;
+        column-gap: 8px;
+    }
+
+    #pages > button {
+        padding: 1px 5px;
+    }
+
+    #pages > button:hover {
+        color: #66c0f4;
+        text-decoration: underline;
+    }
+
+    .page-nav {
+        background-color: #4b586e;
+        padding: 0 5px;
+        cursor: pointer;
+        border-radius: 2px;
+    }
+
+    .page-nav:hover {
+        background-color: #767f8a;
+    }
+
+    .nav-disabled {
+        opacity: 50%;
+    }
+
+    .nav-disabled {
+        background-color: #4b586e !important;
+    }
+
+    .page-selected {
+        color: #66c0f4;
+        text-decoration: none !important;
+    }
+
+    .hide-page {
+        display: none;
     }
 
     #narrow-products {
