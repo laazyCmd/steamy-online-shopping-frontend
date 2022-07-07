@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
-    export let sort_by = "Release date";
+    export let getProductList;
+    let selectedSort = "Release date";
     let open_sorting = false;
 
     onMount( () => {
@@ -10,14 +11,18 @@
 
         const slots = document.getElementById( "sort-selection" ).children;
         for ( const slot of slots ) {
-            slot.addEventListener( "click", ( e ) => sort_by = slot.innerText ) ;
+            if ( sortBy === slot.dataset.sort ) selectedSort = slot.innerText;
+            slot.addEventListener( "click", ( e ) => {
+                selectedSort = slot.innerText;
+                getProductList( slot.dataset.sort );
+            } ) ;
         }
     } );
 </script>
 
 <button id="sort-button" on:click={ () => open_sorting = !open_sorting }>
     <p class="flex justify-between items-center text-[#67C1F5] bg-[#213A4C] rounded-sm px-[8px] gap-x-[10px] w-[145px] fill-white hover:text-white hover:bg-[#5199c2]">
-        { sort_by }
+        { selectedSort }
         <figure>
             <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="18" height="18"><path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z"/></svg>
         </figure>
