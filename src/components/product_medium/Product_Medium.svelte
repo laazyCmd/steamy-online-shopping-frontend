@@ -3,12 +3,12 @@
     const productLink = product.id ? "/product/" + product.id + "/" + encodeURIComponent( product.name ) : "/";
 </script>
 
-<a href={ productLink } class="w-full h-full bg-[#1A678A] overflow-hidden">
+<a href={ productLink } class="w-full h-full bg-[#1A678A] overflow-hidden group">
     <!-- Product Image -->
-    <header class="flex justify-center h-[60%] bg-white">
+    <header class="flex justify-center h-[60%] bg-white overflow-hidden">
         <figure class="my-auto">
             { #if product.image }
-                <img src="data:image/jpg;base64,{ product.image }" alt="Steamy" width="218" height="63">
+                <img class="group-hover:scale-125 duration-200" src="data:image/jpg;base64,{ product.image }" alt="Steamy" width="218" height="63">
             { :else }
                 <img src="/steamy-logo.png" alt="Steamy" width="218" height="63">
             { /if }

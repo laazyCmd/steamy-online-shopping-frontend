@@ -2,12 +2,12 @@
     export let product = {};
 </script>
 
-<a href="/{ "product/" + product.id }/{ encodeURIComponent( product.name ) }" class="h-[277px] w-[486px] overflow-hidden rounded-sm">
+<a href="/{ "product/" + product.id }/{ encodeURIComponent( product.name ) }" class="h-[277px] w-[486px] overflow-hidden rounded-sm group">
     <!-- Product Image -->
-    <header class="flex justify-center h-[60%] bg-white">
+    <header class="flex justify-center h-[60%] bg-white overflow-hidden">
         <figure class="my-auto">
             { #if product.image }
-                <img src="data:image/jpg;base64,{ product.image }" alt="Steamy" width="221" height="64">
+                <img class="group-hover:scale-125 duration-200" src="data:image/jpg;base64,{ product.image }" alt="Steamy" width="221" height="64">
             { :else }
                 <img src="/steamy-logo.png" alt="Steamy" width="221" height="64">
             { /if }
