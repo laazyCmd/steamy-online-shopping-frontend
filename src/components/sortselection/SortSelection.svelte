@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    export let getProductList;
+    export let sortBy, getProductList;
     let selectedSort = "Release date";
     let open_sorting = false;
 
