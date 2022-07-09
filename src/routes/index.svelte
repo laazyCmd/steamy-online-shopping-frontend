@@ -69,10 +69,10 @@
     <header>
         <h1>UNDER P400</h1>
         <section>
-            <SectionsButton href="/">
+            <SectionsButton href="/search?price=200">
                 Under P200
             </SectionsButton>
-            <SectionsButton href="/">
+            <SectionsButton href="/search">
                 Browse for more
             </SectionsButton>
         </section>
