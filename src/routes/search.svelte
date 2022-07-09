@@ -16,9 +16,8 @@
     let totalPages = 0;
     let currentPage = 0;
 
-    const switchPage = ( page ) => {
-        currentPage = page;
-        console.log( currentPage );
+    const switchPage = ( pageIndex ) => {
+        currentPage = pageIndex;
         getProductList( sortBy );
     }
 
@@ -63,7 +62,7 @@
                 <!-- Sort by -->
                 <section id="sort-by">
                     <p>Sort by</p>
-                    <SortSelection { getProductList }>
+                    <SortSelection { sortBy } { getProductList }>
                         <button data-sort="dateCreated">Release date</button>
                         <button data-sort="name">Name</button>
                         <button data-sort="price,desc">Highest price</button>
@@ -92,41 +91,43 @@
                 { /if }
             </ul>
             <!-- page buttons -->
-            <section id="page-buttons">
-                <button class="page-nav"
-                class:nav-disabled={ currentPage === 0 }
-                on:click={ () => switchPage( --currentPage ) }
-                disabled={ currentPage === 0 }>
-                    <figure>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="20" height="31"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M328 112L184 256l144 144"/></svg>
-                    </figure>
-                </button>
-                <div id="pages">
-                    { #each Array( 5 ) as _, index }
-                        { #if currentPage >= 5 }
-                            <button on:click={ () => switchPage( index + currentPage ) }
-                            class:page-selected={ index + currentPage === currentPage }
-                            class:hide-page={ index + currentPage >= totalPages }>
-                                { ( index + currentPage ) + 1 }
-                            </button>
-                        { :else }
-                            <button on:click={ () => switchPage( index ) }
-                            class:page-selected={ index === currentPage }
-                            class:hide-page={ index >= totalPages }>
-                                { index + 1 }
-                            </button>
-                        { /if }
-                    { /each }
-                </div>
-                <button class="page-nav"
-                class:nav-disabled={ currentPage === totalPages - 1 }
-                on:click={ () => switchPage( ++currentPage ) }
-                disabled={ currentPage === totalPages - 1 }>
-                    <figure>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="20" height="31"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"/></svg>
-                    </figure>
-                </button>
-            </section>
+            { #if Object.keys( products ).length }
+                <section id="page-buttons">
+                    <button class="page-nav"
+                    class:nav-disabled={ currentPage === 0 }
+                    on:click={ () => switchPage( --currentPage ) }
+                    disabled={ currentPage === 0 }>
+                        <figure>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="20" height="31"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M328 112L184 256l144 144"/></svg>
+                        </figure>
+                    </button>
+                    <div id="pages">
+                        { #each Array( 5 ) as _, index }
+                            { #if currentPage >= 4 }
+                                <button on:click={ () => switchPage( index + currentPage ) }
+                                class:page-selected={ index + currentPage === currentPage }
+                                class:hide-page-button={ index + currentPage >= totalPages }>
+                                    { ( index + currentPage ) + 1 }
+                                </button>
+                            { :else }
+                                <button on:click={ () => switchPage( index ) }
+                                class:page-selected={ index === currentPage }
+                                class:hide-page-button={ index >= totalPages }>
+                                    { index + 1 }
+                                </button>
+                            { /if }
+                        { /each }
+                    </div>
+                    <button class="page-nav"
+                    class:nav-disabled={ currentPage === totalPages - 1 }
+                    on:click={ () => switchPage( ++currentPage ) }
+                    disabled={ currentPage === totalPages - 1 }>
+                        <figure>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="20" height="31"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"/></svg>
+                        </figure>
+                    </button>
+                </section>
+            { /if }
         </div>
         <div id="narrow-products">
             <!-- Narrow by Price -->
@@ -317,7 +318,7 @@
         text-decoration: none !important;
     }
 
-    .hide-page {
+    .hide-page-button {
         display: none;
     }
 
