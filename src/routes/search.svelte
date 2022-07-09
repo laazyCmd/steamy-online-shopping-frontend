@@ -167,31 +167,35 @@
                 <ul id="narrow-categories">
                     <li>
                         <a href="?category=components"
-                        traget="_self"
+                        target="_self"
                         on:click={ switchCategory }>
                             Components
                         </a>
                     </li>
                     <li>
                         <a href="?category=electronics"
+                        target="_self"
                         on:click={ switchCategory }>
                             Electronics
                         </a>
                     </li>
                     <li>
                         <a href="?category=hometools"
+                        target="_self"
                         on:click={ switchCategory }>
                             Home & Tools
                         </a>
                     </li>
                     <li>
                         <a href="?category=software"
+                        target="_self"
                         on:click={ switchCategory }>
                             Software
                         </a>
                     </li>
                     <li>
                         <a href="?category=toysdrones"
+                        target="_self"
                         on:click={ switchCategory }>
                             Toys & Drones
                         </a>
