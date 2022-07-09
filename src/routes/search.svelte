@@ -20,20 +20,23 @@
         currentPage = pageIndex;
         getProductList( sortBy );
     }
+    
+    const switchCategory = () => {
+        products = {};
+        currentPage = 0;
+        getProductList( sortBy );
+    }
 
     const getProductList = async ( sort ) => {
         if ( price_under[0] !== 2600 ) $page.url.searchParams.set( "price", `${ price_under }` );
         if ( searchTag.trim() !== "" ) $page.url.searchParams.set( "name", searchTag.trim() );
-        $page.url.searchParams.set( "page", currentPage.toString() );
         
         sortBy = sort ?? "dateCreated";
         $page.url.searchParams.set( "sort", sortBy );
-
-        console.log( "http://localhost:8093/product/list?" + $page.url.searchParams.toString() );
-
         goto( "?" + $page.url.searchParams.toString() );
 
-        const req = await fetch( "http://localhost:8093/product/list?" + $page.url.searchParams.toString() );
+
+        const req = await fetch( "http://localhost:8093/product/list?" + $page.url.searchParams.toString() + "&page=" + currentPage.toString() );
         const res = await req.json();
 
         products = res.content;
@@ -163,19 +166,35 @@
                 <!-- Categories -->
                 <ul id="narrow-categories">
                     <li>
-                        <a href="/">Components</a>
+                        <a href="?category=components"
+                        traget="_self"
+                        on:click={ switchCategory }>
+                            Components
+                        </a>
                     </li>
                     <li>
-                        <a href="/">Electronics</a>
+                        <a href="?category=electronics"
+                        on:click={ switchCategory }>
+                            Electronics
+                        </a>
                     </li>
                     <li>
-                        <a href="/">Home & Tools</a>
+                        <a href="?category=hometools"
+                        on:click={ switchCategory }>
+                            Home & Tools
+                        </a>
                     </li>
                     <li>
-                        <a href="/">Software</a>
+                        <a href="?category=software"
+                        on:click={ switchCategory }>
+                            Software
+                        </a>
                     </li>
                     <li>
-                        <a href="/">Toys & Drones</a>
+                        <a href="?category=toysdrones"
+                        on:click={ switchCategory }>
+                            Toys & Drones
+                        </a>
                     </li>
                 </ul>
             </div>
