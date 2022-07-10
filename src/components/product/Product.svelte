@@ -3,9 +3,9 @@
     const productLink = product.id ? "/product/" + product.id + "/" + encodeURIComponent( product.name ) : "/";
 </script>
 
-<a href={ productLink } class="w-[290px] h-[415px] bg-[#1A678A] rounded-sm overflow-hidden group">
+<a href={ productLink } class="w-[290px] h-[415px] bg-[#1A678A] group relative rounded-sm">
     <!-- Product Image -->
-    <header class="flex justify-center h-[60%] bg-white overflow-hidden">
+    <header class="flex justify-center h-[60%] bg-white overflow-hidden rounded-t-sm">
         <figure class="my-auto">
             { #if product.image }
                 <img class="group-hover:scale-125 duration-200" src="data:image/jpg;base64,{ product.image }" alt="Steamy" width="218" height="63">
@@ -15,7 +15,7 @@
         </figure>
     </header>
     <!-- Product Details -->
-    <section class="flex flex-col bg-[#1A678A] h-[40%] p-3">
+    <section class="flex flex-col bg-[#1A678A] h-[40%] p-3 rounded-b-sm">
         <!-- Name -->
         <header class="h-full">
             { #if product.name }
@@ -40,4 +40,11 @@
             { /if }
         </div>
     </section>
+    <!-- add to cart -->
+    { #if product }
+        <button class="absolute hidden group-hover:inline-block text-center bg-[#64B3E1] w-full -translate-y-1 hover:bg-[#6EC3F4] text-md p-2 z-10">
+            ADD TO CART
+        </button>
+    { /if }
 </a>
+

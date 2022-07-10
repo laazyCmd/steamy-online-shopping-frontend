@@ -290,7 +290,6 @@
 
     #product-results > li {
         border-radius: 2px;
-        overflow: hidden;
         width: 220px;
         height: 330px;
     }

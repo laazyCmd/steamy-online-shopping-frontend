@@ -33,7 +33,7 @@
             </figure>
         </button>
     </div>
-    <div id="carousel-content" class="relative flex overflow-hidden h-[277px]">
+    <div id="carousel-content" class="relative flex h-[277px]">
         <slot></slot>
     </div>
     <div id="next-arrow" class="absolute flex top-0 justify-center h-full flex-col right-0 translate-x-12">
