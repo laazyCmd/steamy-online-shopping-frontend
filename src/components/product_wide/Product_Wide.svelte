@@ -1,11 +1,24 @@
 <script>
+    import { cartList } from "$lib/cart.js";
     export let product = {};
-    const productLink = product.id ? "/product/" + product.id + "/" + encodeURIComponent( product.name ) : "/";
+    const productLink = Object.keys( product ).length !== 0 ? "/product/" + product.id + "/" + encodeURIComponent( product.name ) : "/";
+
+    const addToCart = () => {
+        const newProduct = {
+            id: product.id,
+            image: product.image,
+            name: product.name,
+            price: product.price,
+            stock: 1
+        }
+        
+        cartList.update( currentList => [ ...currentList, newProduct ] );
+    }
 </script>
 
-<a href={ productLink } class="h-[277px] w-[486px] rounded-sm group relative">
+<div class="h-[277px] w-[486px] rounded-sm group relative">
     <!-- Product Image -->
-    <header class="flex justify-center h-[60%] bg-white overflow-hidden rounded-t-sm">
+    <a href={ productLink } class="flex justify-center h-[60%] bg-white overflow-hidden rounded-t-sm">
         <figure class="my-auto">
             { #if product.image }
                 <img class="group-hover:scale-125 duration-200" src="data:image/jpg;base64,{ product.image }" alt="Steamy" width="221" height="64">
@@ -13,9 +26,9 @@
                 <img src="/steamy-logo.png" alt="Steamy" width="221" height="64">
             { /if }
         </figure>
-    </header>
+    </a>
     <!-- Product Details -->
-    <section class="flex flex-col bg-[#1A678A] h-[40%] p-3 rounded-b-sm">
+    <a href={ productLink } class="flex flex-col bg-[#1A678A] h-[40%] p-3 rounded-b-sm">
         <!-- Name -->
         <header class="h-full">
             { #if product.name }
@@ -43,11 +56,12 @@
                 <span class="inline-block bg-white w-[82px] h-[18px] opacity-50 rounded-xl my-[3px]"></span>
             { /if }
         </div>
-    </section>
+    </a>
     <!-- add to cart -->
     { #if product }
-        <button class="absolute hidden group-hover:block text-center bg-[#64B3E1] w-full -translate-y-1 hover:bg-[#6EC3F4] text-md p-2 z-10">
+        <button class="absolute hidden group-hover:block text-center bg-[#64B3E1] w-full -translate-y-1 hover:bg-[#6EC3F4] text-md p-2 z-10"
+        on:click={ addToCart }>
             ADD TO CART
         </button>
     { /if }
-</a>
+</div>
