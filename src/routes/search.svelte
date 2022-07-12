@@ -66,10 +66,10 @@
                 <section id="sort-by">
                     <p>Sort by</p>
                     <SortSelection { sortBy } { getProductList }>
-                        <button data-sort="dateCreated">Release date</button>
-                        <button data-sort="name">Name</button>
-                        <button data-sort="price,desc">Highest price</button>
-                        <button data-sort="price,asc">Lowest price</button>
+                        <button class="sort-option" data-sort="dateCreated">Release date</button>
+                        <button class="sort-option" data-sort="name">Name</button>
+                        <button class="sort-option" data-sort="price,desc">Highest price</button>
+                        <button class="sort-option" data-sort="price,asc">Lowest price</button>
                     </SortSelection>
                 </section>
             </header>
@@ -241,7 +241,6 @@
         padding: 10px;
     }
 
-    #sort-by,
     #search {
         display: flex;
         align-items: center;
@@ -271,6 +270,9 @@
     }
 
     #sort-by {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
         position: relative;
     }
 
@@ -278,6 +280,10 @@
         color: #4C6C8C;
         font-size: 0.875rem; /* 14px */
         line-height: 1.25rem; /* 20px */
+    }
+
+    .sort-option {
+        display: none;
     }
 
     #product-results {

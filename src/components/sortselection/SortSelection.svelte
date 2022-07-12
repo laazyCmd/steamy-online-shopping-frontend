@@ -2,11 +2,11 @@
     import { onMount } from "svelte";
     export let sortBy, getProductList;
     let selectedSort = "Release date";
-    let open_sorting = false;
+    let openSorting = false;
 
     onMount( () => {
         window.addEventListener( "click", ( event ) => {
-            if ( event.target?.parentNode.id !== "sort-button" ) open_sorting = false;
+            if ( event.target?.parentNode.id !== "sort-button" ) openSorting = false;
         } );
 
         const slots = document.getElementById( "sort-selection" ).children;
@@ -15,32 +15,30 @@
             slot.addEventListener( "click", ( e ) => {
                 selectedSort = slot.innerText;
                 getProductList( slot.dataset.sort );
-            } ) ;
+            } );
         }
     } );
 </script>
 
-<button id="sort-button" on:click={ () => open_sorting = !open_sorting }>
+<button id="sort-button" on:click={ () => openSorting = !openSorting }>
     <p class="flex justify-between items-center text-[#67C1F5] bg-[#213A4C] rounded-sm px-[8px] gap-x-[10px] w-[145px] fill-white hover:text-white hover:bg-[#5199c2]">
         { selectedSort }
-        <figure>
-            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="18" height="18"><path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z"/></svg>
-        </figure>
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="18" height="18"><path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z"/></svg>
     </p>
     <ul id="sort-selection" 
-    class="absolute text-left w-full mt-[5px] bg-[#417a9b] hidden" 
-    class:sort-selection_show={ open_sorting }>
+    class="absolute text-left w-full mt-[5px] bg-[#417a9b] hidden z-10"
+    class:sort-selection_show={ openSorting }>
         <slot/>
     </ul>
 </button>
 
 <style>
-    .sort-selection_show {
-        display: block;
+    .sort-selection_show,
+    .sort-selection_show > :global( .sort-option ) {
+        display: block !important;
     }
 
     :global( #sort-selection > * ) {
-        display: block;
         text-align: left;
         width: 100%;
         height: 100%;
