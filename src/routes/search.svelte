@@ -8,9 +8,8 @@
     import RangeSlider from "svelte-range-slider-pips";
     
     let searchTag = $page.url.searchParams.get( "name" )?.trim() ?? "";
-    let price_under = [2600];
-    if ( $page.url.searchParams.get( "price" ) ) price_under[0] = parseInt( $page.url.searchParams.get( "price" ) );
-    let sortBy = $page.url.searchParams.get( "sort" );
+    let price_under = [ parseInt( $page.url.searchParams.get( "price" ) ?? "2600" ) ];
+    let sortBy = $page.url.searchParams.get( "sort" ) ?? "dateCreated";
 
     let products = {};
     let totalPages = 0;
@@ -31,10 +30,9 @@
         if ( price_under[0] !== 2600 ) $page.url.searchParams.set( "price", `${ price_under }` );
         if ( searchTag.trim() !== "" ) $page.url.searchParams.set( "name", searchTag.trim() );
         
-        sortBy = sort ?? "dateCreated";
+        sortBy = sort;
         $page.url.searchParams.set( "sort", sortBy );
         goto( "?" + $page.url.searchParams.toString() );
-
 
         const req = await fetch( "http://localhost:8093/product/list?" + $page.url.searchParams.toString() + "&page=" + currentPage.toString() );
         const res = await req.json();
@@ -43,7 +41,7 @@
         totalPages = res.totalPages;
     };
     
-    onMount( () => getProductList() );
+    onMount( () => getProductList( sortBy ) );
 </script>
 
 <!-- All Products -->
