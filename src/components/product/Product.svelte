@@ -12,6 +12,14 @@
             stock: 1
         }
         
+        for ( const item of $cartList ) {
+            if ( item.id === product.id ) {
+                item.stock += 1;
+                console.log( $cartList );
+                return;
+            }
+        }
+
         cartList.update( currentList => [ ...currentList, newProduct ] );
     }
 </script>
