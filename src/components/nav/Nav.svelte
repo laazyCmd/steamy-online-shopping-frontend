@@ -1,4 +1,5 @@
 <script>
+    import { cartList } from "$lib/cart.js";
     import Input_ButtonWithin from "$components/input_buttonwithin/Input_ButtonWithin.svelte";
 </script>
 
@@ -49,7 +50,12 @@
             </section>
         </div>
         <!-- Cart -->
-        <button class="hover:opacity-75">
+        <button class="hover:opacity-75 relative">
+            { #if $cartList.length !== 0 }
+                <span class="absolute top-0 right-0 bg-white text-[#171a21] rounded-full px-1.5 translate-x-1 text-sm border-[#171a21] border-2">
+                    { $cartList.length }
+                </span>
+            { /if }
             <figure>
                 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="59" height="59"><circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M48 80h64l48 272h256"/><path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
             </figure>
