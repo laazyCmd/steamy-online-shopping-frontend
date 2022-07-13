@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Steamy, The Fake E-Commerce Website</title>
+</svelte:head>
+
 <div id="about-page">
     <header>
         <figure>

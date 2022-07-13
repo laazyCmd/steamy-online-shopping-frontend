@@ -4,6 +4,10 @@
     const description = "<p>" + product.description.replace( "\n", "</p>\n<p>") + "</p>";
 </script>
 
+<svelte:head>
+    <title>{ product.name } on Steamy</title>
+</svelte:head>
+
 <div id="product-page">
     <header id="product-breadcrumb">
         <a href="/">All Products</a>

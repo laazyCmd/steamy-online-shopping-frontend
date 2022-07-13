@@ -26,6 +26,10 @@
     getBelow400();
 </script>
 
+<svelte:head>
+    <title>Welcome to Steamy</title>
+</svelte:head>
+
 <!-- popular & featured -->
 <section class="index-sections">
     <header>

@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Sign In</title>
+</svelte:head>
+
 <div id="login-page">
     <header>
         <p>LOG IN</p>

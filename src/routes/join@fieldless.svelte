@@ -1,3 +1,8 @@
+<svelte:head>
+    <title>Create Your Account</title>
+</svelte:head>
+
+
 <div id="join-page">
     <header>
         <p>CREATE YOUR ACCOUNT</p>
