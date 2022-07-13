@@ -27,7 +27,8 @@
     }
 
     const getProductList = async ( sort ) => {
-        if ( price_under[0] !== 2600 ) $page.url.searchParams.set( "price", `${ price_under }` );
+        if ( price_under[0] === 2600 ) $page.url.searchParams.delete( "price" );
+        else $page.url.searchParams.set( "price", `${ price_under }` );
         if ( searchTag.trim() !== "" ) $page.url.searchParams.set( "name", searchTag.trim() );
         
         sortBy = sort;
@@ -378,16 +379,16 @@
     }
 
     :global( .rangeSlider > .rangeHandle ) {
-        width: 18px;
-        height: 19px;
+        width: 19px !important;
+        height: 19.25px !important;
     }
 
     :global( 
         .rangeSlider > .rangeHandle > .rangeNub,
         .rangeSlider > .rageHandle.active > .rangeNub 
     ) {
-        width: 16px;
-        height: 16px;
+        width: 16px !important;
+        height: 16px !important;
         background-color: white !important;
         cursor: pointer;
         box-shadow: 0px 0px 5px 2px rgba( 0, 0, 0, 0.5 );
@@ -399,7 +400,7 @@
 
     :global( .rangeSlider ) {
         background-color: #67C1F5 !important;
-        height: 5px;
+        height: 5px !important;
     }
 
     #narrow-categories {
