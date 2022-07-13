@@ -45,6 +45,10 @@
     onMount( () => getProductList( sortBy ) );
 </script>
 
+<svelte:head>
+    <title>Steamy Search</title>
+</svelte:head>
+
 <!-- All Products -->
 <section id="all-products">
     <header>
