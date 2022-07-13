@@ -1,8 +1,8 @@
 <script>
     import { cartList } from "$lib/cart.js";
     export let product = {};
-    const productLink = Object.keys( product ).length !== 0 ? "/product/" + product.id + "/" + encodeURIComponent( product.name ) : "/";
-
+    const productLink = Object.keys( product ).length === 0 ? "/" : "/product/" + product.id + "/" + encodeURIComponent( product.name );
+    
     const addToCart = () => {
         const newProduct = {
             id: product.id,
@@ -16,7 +16,6 @@
         for ( const item of $cartList ) {
             if ( item.id === product.id ) {
                 item.stock += 1;
-                console.log( $cartList );
                 return;
             }
         }
