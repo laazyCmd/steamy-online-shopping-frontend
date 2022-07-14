@@ -85,7 +85,7 @@
                                             { product.name }
                                         </a>
                                         <p class="text-sm opacity-50">Quantity: { product.stock }</p>
-                                        <p class="text-sm opacity-50">Price: P{ product.price * product.stock }</p>
+                                        <p class="text-sm opacity-50">Price: P{ ( product.price * product.stock ).toFixed( 2 ) }</p>
                                     </li>
                                 { /each }
                             </ul>
