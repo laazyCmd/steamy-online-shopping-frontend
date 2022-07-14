@@ -1,7 +1,30 @@
 <script>
+    import { cartList } from "$lib/cart";
     import Star from "$components/star/Star.svelte";
     export let product;
     const description = "<p>" + product.description.replace( "\n", "</p>\n<p>") + "</p>";
+
+    let productQuantity = 1;
+    $: if ( productQuantity <= 0 ) productQuantity = 1;
+
+    const addToCart = () => {
+        const newProduct = {
+            id: product.id,
+            image: product.image,
+            name: product.name,
+            price: product.price,
+            stock: productQuantity
+        }
+        
+        for ( const [ index, item ] of $cartList.entries() ) {
+            if ( item.id === product.id ) {
+                $cartList[ index ].stock += productQuantity;
+                return;
+            }
+        }
+
+        cartList.update( currentList => [ ...currentList, newProduct ] );
+    }
 </script>
 
 <svelte:head>
@@ -69,14 +92,14 @@
                     <section id="qty">
                         <!-- Add/Remove Quantities -->
                         <div id="add-remove">
-                            <input type="number" min="1" max="99" value="1">
+                            <input type="number" min="1" max="99" bind:value={ productQuantity }>
                             <div id="buttons">
-                                <button>
+                                <button on:click={ () => productQuantity++ }>
                                     <figure>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="15" height="15"><path stroke-linecap="round" fill="none" stroke-linejoin="round" stroke-width="40" d="M256 112v288M400 256H112"/></svg>
                                     </figure>
                                 </button>
-                                <button>
+                                <button on:click={ () => productQuantity-- }>
                                     <figure>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="15" height="15"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="40" d="M400 256H112"/></svg>
                                     </figure>
@@ -88,7 +111,7 @@
                     </section>
                     <section id="add-cart">
                         <p>P{ product.price }</p>
-                        <button>ADD</button>
+                        <button on:click={ addToCart }>ADD</button>
                     </section>
                 </div>
             </section>
