@@ -12,9 +12,9 @@
             stock: 1
         }
         
-        for ( const item of $cartList ) {
+        for ( const [ index, item ] of $cartList.entries() ) {
             if ( item.id === product.id ) {
-                item.stock += 1;
+                $cartList[ index ].stock += 1;
                 return;
             }
         }
