@@ -1,7 +1,7 @@
 <script>
     import { cartList } from "$lib/cart.js";
     export let product = {};
-    const productLink = Object.keys( product ).length === 0 ? "/" : "/product/" + product.id + "/" + encodeURIComponent( product.name );
+    const productLink = typeof( product.id ) === undefined ? "/" : "/product/" + product.id + "/" + encodeURIComponent( product.name );
 
     const addToCart = () => {
         const newProduct = {
