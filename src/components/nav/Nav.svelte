@@ -71,7 +71,7 @@
                 </figure>
                 <div class="rounded-sm overflow-hidden">
                     <div id="cart-list"
-                    class="bg-white text-black w-[200px] px-2 py-2 max-h-[269px] overflow-y-scroll">
+                    class="bg-white text-black w-[200px] px-2 py-2 max-h-[350px] overflow-y-scroll">
                         <header class="my-1">
                             <h1 class="text-md">Your Cart</h1>
                             <hr class="mx-3 my-1">
