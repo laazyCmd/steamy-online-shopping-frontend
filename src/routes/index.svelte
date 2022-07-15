@@ -53,16 +53,16 @@
     </header>
     <!-- Categories -->
     <div class="sections-content">
-        <a class="categories-button" href="/">
+        <a class="categories-button" href="/search?sort=dateCreated">
             LATEST
         </a>
-        <a class="categories-button" href="/">
-            DISCOUNTED
+        <a class="categories-button" href="sort=price%2Casc">
+            LOWEST PRICE
         </a>
-        <a class="categories-button" href="/">
+        <a class="categories-button" href="/search?shippingFee=0">
             FREE SHIPPING
         </a>
-        <a class="categories-button" href="/">
+        <a class="categories-button" href="/search?price=0">
             FREEBIES
         </a>
     </div>
