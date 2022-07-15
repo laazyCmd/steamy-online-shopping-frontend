@@ -5,7 +5,10 @@
     const description = "<p>" + product.description.replace( "\n", "</p>\n<p>") + "</p>";
 
     let productQuantity = 1;
-    $: if ( productQuantity <= 0 ) productQuantity = 1;
+    $: {
+        if ( productQuantity < 1 ) productQuantity = 1;
+        if ( productQuantity > 99 ) productQuantity = 99;
+    }
 
     const addToCart = () => {
         const newProduct = {
@@ -84,7 +87,7 @@
                     </header>
                     <section id="shipping-details">
                         <p>Ships from <span>{ product.shippingOrigin }</span></p>
-                        <p>Shipping fee <span>P{ product.shippingFee }</span></p>
+                        <p>Shipping fee <span>{ product.shippingFee === 0 ? "Free Shipping!" : "P" + product.shippingFee }</span></p>
                     </section>
                 </div>
                 <!-- Quantity & Add to Cart -->
@@ -92,7 +95,7 @@
                     <section id="qty">
                         <!-- Add/Remove Quantities -->
                         <div id="add-remove">
-                            <input type="number" min="1" max="99" bind:value={ productQuantity }>
+                            <input type="number" bind:value={ productQuantity }>
                             <div id="buttons">
                                 <button on:click={ () => productQuantity++ }>
                                     <figure>
@@ -121,17 +124,10 @@
             <header>
                 <p>PRODUCT SPECIFICATIONS</p>
             </header>
-            <section id="specifications">
-                <!-- Left Column -->
-                <div id="left-column">
-                    <p>Category</p>
-                    <p>Country of origin</p>
-                    <p>Stocks</p>
-                    <p>Ships from</p>
-                </div>
-                <!-- Right Column -->
-                <div id="right-column">
-                    <div id="category">
+            <table id="specifications">
+                <tr>
+                    <th>Category</th>
+                    <td id="category">
                         <a href="/">All Products</a>
                         <span>></span>
                         <a href="/">{ product.category }</a>
@@ -141,12 +137,21 @@
                             <span>></span>
                         { /if }
                         <a href="/">{ product.name }</a>
-                    </div>
-                    <p>{ product.countryOrigin }</p>
-                    <p>{ product.stocks }</p>
-                    <p>{ product.shippingOrigin }</p>
-                </div>
-            </section>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Country of origin</th>
+                    <td>{ product.countryOrigin }</td>
+                </tr>
+                <tr>
+                    <th>Stocks</th>
+                    <td>{ product.stocks }</td>
+                </tr>
+                <tr>
+                    <th>Ships from</th>
+                    <td>{ product.shippingOrigin }</td>
+                </tr>
+            </table>
         </div>
         <!-- Description -->
         <div id="product-description">
@@ -368,22 +373,15 @@
     }
 
     #specifications {
-        display: flex;
+        border-collapse: separate;
+        border-spacing: 0 5px;
         margin-top: 10px;
     }
 
-    #specifications > div {
-        display: flex;
-        flex-direction: column;
-        row-gap: 5px;
-    }
-
-    #left-column {
-        margin-right: 2rem;
-    }
-
-    #right-column {
-        flex-grow: 1;
+    #specifications > tr > th {
+        width: 150px;
+        font-weight: normal;
+        text-align: left;
     }
 
     #category > a {
