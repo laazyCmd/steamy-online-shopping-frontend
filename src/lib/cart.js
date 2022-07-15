@@ -15,5 +15,5 @@ if ( browser ) {
     date.setDate( date.getDate() + 1 );
             
     checkCookie();
-    cartList.subscribe( list => document.cookie = "cart=" + JSON.stringify( list ) + "; expires=" + date.toUTCString() + "; SameSite=None; Secure" );
+    cartList.subscribe( list => document.cookie = "cart=" + JSON.stringify( list ) + "; expires=" + date.toUTCString() + "; path=/; SameSite=None; Secure" );
 }
