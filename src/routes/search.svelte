@@ -290,8 +290,8 @@
     }
 
     #product-results {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
         margin-top: 8px;
         row-gap: 10px;
         justify-content: space-between;
