@@ -55,17 +55,17 @@
             </section>
         </div>
         <!-- Cart -->
-        <button class="group relative">
+        <div class="group relative">
             { #if $cartList.length !== 0 }
                 <span class="absolute top-0 right-0 bg-white text-[#171a21] rounded-full px-1.5 text-sm border-[#171a21] border-2 z-10">
                     { $cartList.length }
                 </span>
             { /if }
-            <figure class="group-hover:opacity-75">
+            <button class="group-hover:opacity-75">
                 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="59" height="59"><circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M48 80h64l48 272h256"/><path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
-            </figure>
+            </button>
             <!-- cart list -->
-            <section class="absolute left-1/2 -translate-x-1/2 -translate-y-1 group-hover:block hidden z-10 border border-[#171a21] cursor-default">
+            <section class="absolute left-1/2 -translate-x-1/2 -translate-y-1 group-hover:block hidden z-10 border border-[#171a21]">
                 <figure>
                     <svg xmlns="http://www.w3.org/2000/svg" class="ionicon fill-white mx-auto" viewBox="0 0 512 340" preserveAspectRatio="xMaxYMax" width="50"><path d="M414 321.94 274.22 158.82a24 24 0 0 0-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
                 </figure>
@@ -73,11 +73,11 @@
                     <div id="cart-list"
                     class="bg-white text-black w-[200px] px-2 py-2 max-h-[350px] overflow-y-scroll">
                         <header class="my-1">
-                            <h1 class="text-md">Your Cart</h1>
+                            <h1 class="text-md text-center">Your Cart</h1>
                             <hr class="mx-3 my-1">
                         </header>
                         { #if $cartList.length === 0 }
-                            <p class="mt-4 text-sm opacity-50">Cart is empty.</p>
+                            <p class="mt-4 text-sm opacity-50 text-center">Cart is empty.</p>
                         { :else }
                             <ul>
                                 { #each productCart as product, index }
@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </section>
-        </button>
+        </div>
     </header>
 </nav>
 
