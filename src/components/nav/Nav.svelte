@@ -50,7 +50,58 @@
             <section class="flex absolute gap-x-8 text-xl mt-4">
                 <a class="hover:opacity-75" href="/">STORE</a>
                 <a class="hover:opacity-75" href="/search">NEW & POPULAR</a>
-                <button class="hover:opacity-75">CATEGORIES</button>
+                <span class="group z-10 relative">
+                    <p class="cursor-default group-hover:opacity-75">CATEGORIES</p>
+                    <!-- categories list -->
+                    <section class="absolute left-1/2 -translate-x-1/2 -translate-y-2 group-hover:block hidden">
+                        <figure>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon fill-white mx-auto translate-y-1" viewBox="0 0 512 340" preserveAspectRatio="xMaxYMax" width="50"><path d="M414 321.94 274.22 158.82a24 24 0 0 0-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
+                        </figure>
+                        <div class="rounded-sm text-sm overflow-hidden border border-[#171a21] w-max">
+                            <div class="flex bg-white text-black px-5 py-4">
+                                <!-- special sections -->
+                                <section>
+                                    <header class="mr-14">
+                                        <p class="text-[#2EBFFF] font-bold">SPECIAL SECTIONS</p>
+                                    </header>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?sort=dateCreated">Latest</a>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?sort=price,asc">Lowest Price</a>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?shippingFee=0">Free Shipping</a>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?price=0">Freebies</a>
+                                </section>
+                                <!-- genre -->
+                                <section>
+                                    <header class="mr-14">
+                                        <p class="text-[#2EBFFF] font-bold">GENRE</p>
+                                    </header>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?category=components">Components</a>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?category=electronics">Electronics</a>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?category=hometools">Home & Tools</a>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?category=software">Software</a>
+                                    <a class="block my-2 w-fit border-b-transparent border-b-2 hover:border-b-[#2ec0ffa1] duration-200" 
+                                    target="_self"
+                                    href="/search?category=toysdrones">Toys & Drones</a>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+                </span>
                 <a class="hover:opacity-75" href="/about">ABOUT</a>
             </section>
         </div>
@@ -65,11 +116,11 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" width="59" height="59"><circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M48 80h64l48 272h256"/><path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
             </button>
             <!-- cart list -->
-            <section class="absolute left-1/2 -translate-x-1/2 -translate-y-1 group-hover:block hidden z-10 border border-[#171a21]">
+            <section class="absolute left-1/2 -translate-x-1/2 -translate-y-2 group-hover:block hidden z-10">
                 <figure>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon fill-white mx-auto" viewBox="0 0 512 340" preserveAspectRatio="xMaxYMax" width="50"><path d="M414 321.94 274.22 158.82a24 24 0 0 0-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon fill-white mx-auto translate-y-1" viewBox="0 0 512 340" preserveAspectRatio="xMaxYMax" width="50"><path d="M414 321.94 274.22 158.82a24 24 0 0 0-36.44 0L98 321.94c-13.34 15.57-2.28 39.62 18.22 39.62h279.6c20.5 0 31.56-24.05 18.18-39.62z"/></svg>
                 </figure>
-                <div class="rounded-sm overflow-hidden">
+                <div class="rounded-sm overflow-hidden border border-[#171a21]">
                     <div id="cart-list"
                     class="bg-white text-black w-[200px] px-2 py-2 max-h-[350px] overflow-y-scroll">
                         <header class="my-1">
